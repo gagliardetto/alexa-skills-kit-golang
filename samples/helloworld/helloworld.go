@@ -6,10 +6,15 @@ import (
 	"log"
 
 	"github.com/aws/aws-lambda-go/lambda"
-	alexa "github.com/ericdaugherty/alexa-skills-kit-golang"
+	alexa "github.com/gagliardetto/alexa-skills-kit-golang"
 )
 
-var a = &alexa.Alexa{ApplicationID: "amzn1.ask.skill.<SKILL_ID>", RequestHandler: &HelloWorld{}, IgnoreApplicationID: true, IgnoreTimestamp: true}
+var a = &alexa.Alexa{
+	ApplicationID:       "amzn1.ask.skill.<SKILL_ID>",
+	RequestHandler:      &HelloWorld{},
+	IgnoreApplicationID: true,
+	IgnoreTimestamp:     true,
+}
 
 const cardTitle = "HelloWorld"
 
@@ -36,10 +41,10 @@ func (h *HelloWorld) OnLaunch(ctx context.Context, request *alexa.Request, sessi
 	log.Printf("OnLaunch requestId=%s, sessionId=%s", request.RequestID, session.SessionID)
 
 	response.SetSimpleCard(cardTitle, speechText)
-	response.SetOutputText(speechText)
+	response.SetOutputSpeech(speechText)
 	response.SetRepromptText(speechText)
 
-	response.ShouldSessionEnd = true
+	response.SetEndSession(true)
 
 	return nil
 }
@@ -55,7 +60,7 @@ func (h *HelloWorld) OnIntent(ctx context.Context, request *alexa.Request, sessi
 		speechText := "Hello World"
 
 		response.SetSimpleCard(cardTitle, speechText)
-		response.SetOutputText(speechText)
+		response.SetOutputSpeech(speechText)
 
 		log.Printf("Set Output speech, value now: %s", response.OutputSpeech.Text)
 	case "AMAZON.HelpIntent":
@@ -63,7 +68,7 @@ func (h *HelloWorld) OnIntent(ctx context.Context, request *alexa.Request, sessi
 		speechText := "You can say hello to me!"
 
 		response.SetSimpleCard("HelloWorld", speechText)
-		response.SetOutputText(speechText)
+		response.SetOutputSpeech(speechText)
 		response.SetRepromptText(speechText)
 	default:
 		return errors.New("Invalid Intent")

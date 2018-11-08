@@ -6,7 +6,7 @@ import (
 	"log"
 
 	"github.com/aws/aws-lambda-go/lambda"
-	alexa "github.com/ericdaugherty/alexa-skills-kit-golang"
+	alexa "github.com/gagliardetto/alexa-skills-kit-golang"
 )
 
 var a = &alexa.Alexa{ApplicationID: "amzn1.ask.skill.08857461-c080-49d6-8646-2f0ca2c14914", RequestHandler: &HelloWorld{}, IgnoreTimestamp: true}

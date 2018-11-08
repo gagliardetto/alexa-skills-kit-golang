@@ -14,7 +14,7 @@ Second, retrieve dependencies
 
 ```
 go get -u github.com/aws/aws-lambda-go/lambda
-go get -u github.com/ericdaugherty/alexa-skills-kit-golang
+go get -u github.com/gagliardetto/alexa-skills-kit-golang
 ```
 
 Third, compile the sample using the included Makefile
